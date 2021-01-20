@@ -10,12 +10,26 @@ using namespace std;
 
 /*
 플로이드 와샬 문제.
-거리가 다 1이라서.. 좀..?
+거리가 다 1이라서.. 의아했었다.
+일반적으로 거리가 다 다른 걸 주는데..
+
+플로이드 와샬 문제를 풀 때 주의할 점은
+초기에 최대 값을 넣어줘야 한다는 점이다.
+
+최단 경로를 찾는 것이기 때문에, 경로가 없는 값에 0이 들어가있으면
+제대로 된 결과가 나오지 않는다. 왜냐면 그게 최단 경로가 되어버리므로.
+조심하길 바라고.
+
+마지막에 INF보다 큰지를 확인했는데, INF 값을 두 번 더해도 int형 범위를 넘어가지 않기 때문에
+범위를 신경쓰지 않아도 됐다.
+
+초반에 ==INF 로 해서 틀렸었음..
 */
 
 int n, m;
 int connect[101][101];
 int x, k;
+int INF = 987654321;
 
 int main() {
 
@@ -27,7 +41,7 @@ int main() {
 	cin >> n >> m;
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= n; j++) {
-			connect[i][j] = 987654321;
+			connect[i][j] = INF;
 			if (i == j) connect[i][j] = 0;
 		}
 	}
@@ -50,7 +64,7 @@ int main() {
 
 	int ans = connect[1][k] + connect[k][x];
 	//cout << connect[1][k] << ' ' << connect[k][x] << endl;
-	if (ans >= 987654321) ans = -1;
+	if (ans >= INF) ans = -1;
 	cout << ans << '\n';
 
 	return 0;
