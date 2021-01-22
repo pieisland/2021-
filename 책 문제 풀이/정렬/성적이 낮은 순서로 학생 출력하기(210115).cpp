@@ -9,6 +9,7 @@
 using namespace std;
 
 //vector.resize 썼다가 시간 날려먹었다.
+//resize할 때랑 그냥 넣어줄 때랑 구분해야 한다.
 
 int n;
 
