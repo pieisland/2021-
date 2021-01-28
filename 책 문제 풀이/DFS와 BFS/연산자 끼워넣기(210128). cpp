@@ -1,0 +1,86 @@
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+
+/*
+그냥 모든 경우의 수록  ㅜ한 문제.
+문제에서 중복되는 것에 대해서 순열조합할 때
+나누기 해서 60개라 했었는데.. 나는 120개로 하는 형태로 했다.
+뭔가 더 효율적으로 푸는 방법이 있을 것 같기는 하지만..
+책 풀이를 봐야겠음.
+*/
+
+using namespace std;
+
+int n;
+int number[11];
+int operators[4];
+int sel[10];
+int INF = 987654321;
+int maxval = -INF;
+int minval = INF;
+vector<int> op;
+
+void dfs(int cnt, vector<int> selval) {
+	if (cnt == n-1) {
+
+		int val = number[0];
+		for (int i = 0; i < n-1; i++) {
+			if (selval[i] == 0) {
+				val = val + number[i + 1];
+			}
+			else if (selval[i] == 1) {
+				val = val - number[i + 1];
+			}
+			else if (selval[i] == 2) {
+				val = val * number[i + 1];
+			}
+			else {
+				val = val / number[i + 1];
+			}
+		}
+		if (val < minval) minval = val;
+		if (val > maxval) maxval = val;
+
+		return;
+	}
+
+	for (int i = 0; i < n - 1; i++) {
+		if (sel[i]) continue;
+		sel[i] = 1;
+		selval.push_back(op[i]);
+		dfs(cnt + 1, selval);
+		sel[i] = 0;
+		selval.pop_back();
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> number[i];
+	}
+
+	//각 연산자가 몇 개 씩 있는가 + - x %
+	for (int i = 0; i < 4; i++) {
+		cin >> operators[i];
+		for (int j = 0; j < operators[i]; j++) {
+			op.push_back(i);
+		}
+	}
+
+	vector<int> selval;
+	dfs(0, selval);
+
+	cout << maxval << '\n';
+	cout << minval << '\n';
+	return 0;
+}
