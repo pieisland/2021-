@@ -1,0 +1,6 @@
+SELECT NAME
+FROM ANIMAL_INS
+ORDER BY DATETIME
+LIMIT 1
+
+/*LIMIT을 통해 상위 레코드 몇 개까지 가져올 지 정할 수 있다.*/
