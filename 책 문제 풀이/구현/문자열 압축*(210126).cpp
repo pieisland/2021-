@@ -37,8 +37,8 @@ int solution(string s) {
 				if (cnt == 1) compressed += prev;
 				else compressed += to_string(cnt) + prev;
 				//다음 값 넣어주고 개수 초기화.
-        prev = s.substr(j, step);
-        cnt=1;
+				prev = s.substr(j, step);
+				cnt=1;
 			}
 		}
 		if (cnt == 1) compressed += prev;
