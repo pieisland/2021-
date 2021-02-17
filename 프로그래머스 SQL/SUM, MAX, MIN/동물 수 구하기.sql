@@ -1,0 +1,4 @@
+SELECT COUNT(*)
+FROM ANIMAL_INS
+
+/*SELECT에 COUNT를 사용해 수를 구할 수 있다.*/
