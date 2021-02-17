@@ -1,0 +1,5 @@
+SELECT ANIAML_ID, NAME, DATETIME
+FROM ANIAML_INS
+ORDER BY NAME, DATETIME DESC
+
+/*여러 기준으로 정렬할 수 있으며 서로 기준이 다를 때는 뒤에 적어준다.*/
