@@ -89,3 +89,87 @@ int main() {
 
 	return 0;
 }
+
+/*
+2차 풀이 210218
+저번에 더 복잡하게 풀어버린 듯.
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+//바다는 1, 육지는 0
+int board[50][50];
+int n, m;
+int charx, chary, d;
+int dir[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0,1} };
+int check[50][50];
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n >> m;
+	cin >> chary >> charx >> d;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> board[i][j];
+		}
+	}
+	
+	int cy = chary;
+	int cx = charx;
+	int cd = d;
+	check[cy][cx] = 1; //가본 칸 표시
+
+	int ans = 1;
+	int count = 0;
+	while (1) {
+		int nd = (cd + 1) % 4;
+		int ny = cy + dir[nd][0];
+		int nx = cx + dir[nd][1];
+
+		if (board[ny][nx] == 0 && check[ny][nx] == 0) {
+			//육지이며 아직 가보지 않은 곳이라면
+			cd = nd;
+			check[ny][nx] = 1;
+			cy = ny;
+			cx = nx;
+			count = 0;
+			ans++;
+		}
+		else { //어쨌든 못간다는건데
+			
+			count++;
+
+			if (count == 4) {
+				//다 돌았으면 바라보는 방향을 유지하라 해서 아직 안 돌림
+				ny = cy - dir[cd][0];
+				nx = cx - dir[cd][1];
+
+				//한 칸 뒤로 갔는데 바다면 멈춘다.
+				if (board[ny][nx] == 1)
+				{
+					break;
+				}
+			}
+			else {
+				cd = nd;
+			}
+		}
+	}
+
+	cout << ans << '\n';
+
+	return 0;
+}
+*/
