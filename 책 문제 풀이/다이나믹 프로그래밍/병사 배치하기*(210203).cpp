@@ -24,6 +24,37 @@ using namespace std;
 * 뭔가 더 복잡했다. 다시 찾아봐야될 것 같기는 한데.
 */
 
+/*
+O(nlogn)으로 푸는 방법
+
+이 문제는 LIS의 반대 버전인 감소하는 것을 찾기 때문에
+arr를 그대로 사용하는 게 아니라 반대로 뒤집어서 해야 O(nlogn)의 LIS 알고리즘을 쓸 때 편할 것이다. 
+
+int newArr[2000];
+for(int i=0;i<n;i++) {
+	newArr[i] = arr[n-1-i];
+}
+
+vector<int> ans;
+ans.push_back(newArr[0]);
+
+int idx=0;
+for(int i=1;i<n;i++) {
+	if(ans[idx] <newArr[i])
+	{
+		ans.push_back(newArr[i]);
+		idx++;
+	}
+	else {
+		auto it = lower_bound(ans.begin(), ans.end(), newArr[i]);
+		*it = newArr[i];
+	}
+}
+
+cout << n - ans.size() <<'\n';
+
+*/
+
 int n;
 int arr[2000];
 int dp[2000];
