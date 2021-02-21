@@ -10,6 +10,7 @@
 using namespace std;
 
 /*
+LCS 문제(Longest Common Subsequence)
 최소 교정 비용 문제랑 뭔가 비슷한 감이 살짝 있기는 하지만 다르다.
 애는 길이를 구하는 것이라서
 같으면 길이가 1 증가하고,
@@ -23,7 +24,7 @@ string s1, s2;
 int dp[31][31];
 
 /*
-테스크 케이스)
+테스 케이스)
 AAACCGTGAGTTATTCGTTCTAGAA
 CACCCCTAAGGTACCTTTGGTTC
 14
