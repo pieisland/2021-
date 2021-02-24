@@ -10,7 +10,6 @@
 using namespace std;
 
 //삽입 정렬
-//책에서 소개한 거 좀 이상하지 않나...
 int n;
 int arr[30];
 
@@ -34,6 +33,21 @@ int main(void) {
 		arr[j + 1] = val;
 	}
 
+	/*
+	//책에서 소개한 방법
+	for (int i = 1; i < n; i++) {
+		for (int j = i; j >= 0; j--) {
+			if (arr[j - 1] > arr[j]) {
+				int tmp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = tmp;
+			}
+			else break;
+		}
+	}
+
+	*/
+	
 	for (int i = 0; i < n; i++) {
 		cout << arr[i] << ' ';
 	}
