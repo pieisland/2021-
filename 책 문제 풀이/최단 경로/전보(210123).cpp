@@ -76,3 +76,84 @@ int main() {
 
 	return 0;
 }
+
+/*
+210224 다시 풀었습니다. 별다른 건 없습니다.
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+// 테스트 케이스
+// 3 2 1 1 2 4 1 3 2 
+// 답: 2 4 
+
+//도시 수, 경로 수, 메시지 보내는 도시아이디
+int n, m, c;
+int cityDist[30001];
+int INF = 987654321;
+
+//연결된 도시랑 그 연결 거리 저장.
+vector<pair<int, int>> city[30001];
+
+void dijkstra() {
+	priority_queue<pair<int, int>> pq;
+	pq.push({ 0, c });
+	cityDist[c] = 0;
+
+	while (!pq.empty()) {
+		int currentCity = pq.top().second;
+		int currentDist = -pq.top().first;
+		pq.pop();
+
+		for (int i = 0; i < city[currentCity].size(); i++) {
+			int nextCity = city[currentCity][i].first;
+			int nextDist = currentDist + city[currentCity][i].second;
+
+			if (cityDist[nextCity] > nextDist) {
+				cityDist[nextCity] = nextDist;
+				pq.push({ -nextDist, nextCity });
+			}
+		}
+	}
+}
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n >> m >> c;
+	for (int i = 0; i < m; i++) {
+		int x, y, z;
+		cin >> x >> y >> z;
+		city[x].push_back({ y, z });
+	}
+
+	for (int i = 0; i <= n; i++)cityDist[i] = INF;
+
+	int ansCnt=0;
+	int ansTime = 0;
+	dijkstra();
+
+	for (int i = 1; i <= n; i++) {
+		if (i == c) continue;
+
+		if (cityDist[i] != INF) {
+			ansCnt++;
+			ansTime = max(ansTime, cityDist[i]);
+		}
+	}
+
+	cout << ansCnt<<' '<< ansTime << '\n';
+
+	return 0;
+}
+*/
