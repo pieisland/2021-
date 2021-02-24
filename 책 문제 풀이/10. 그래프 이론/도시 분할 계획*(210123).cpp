@@ -76,3 +76,97 @@ int main() {
 
 	return 0;
 }
+
+/*
+210224 다시 풀었다. 이번에도 혼자 못 풀었다. 왜냐면 크루스칼 푸는 방법을 잊음.
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+크루스칼 알고리즘은 아직 안 익숙하네.
+연결에 대한 정보 다 저장하고 정렬한 후에
+크기 작은 간선부터 꺼내서 두 개가 서로 부모 다를 때만 이어준다.
+
+크루스칼 쓸 때 하는 건 이게 방향이 없는 거여야 하는거겠지?
+
+테스트케이스) 
+7 12
+1 2 3
+1 3 2
+3 2 1
+2 5 2
+3 4 4
+7 3 6
+5 1 5
+1 6 2
+6 4 1
+6 5 3
+4 5 3
+6 7 4
+
+정답) 8
+
+
+int n, m;
+vector<pair<int, pair<int, int>>> edges;
+int parent[100001];
+
+int findParent(int a) {
+	if (parent[a] == a) return a;
+	else return parent[a] = findParent(parent[a]);
+}
+
+void unionParent(int a, int b) {
+	a = findParent(a);
+	b = findParent(b);
+	if (a < b) parent[b] = a;
+	else parent[a] = b;
+}
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; i++) {
+		parent[i] = i;
+	}
+
+	for (int i = 0; i < m; i++) {
+		int a, b, c;
+		cin >> a >> b >> c;
+		edges.push_back({ c, {a, b} });
+	}
+
+	sort(edges.begin(), edges.end());
+
+	int costSum = 0;
+	int maxVal;
+	for (int i = 0; i < m; i++) {
+		int cost = edges[i].first;
+		int a = edges[i].second.first;
+		int b = edges[i].second.second;
+
+		if (findParent(a) != findParent(b)) {
+			unionParent(a, b);
+			costSum += cost;
+
+			maxVal = cost;
+		}
+	}
+
+	cout << costSum - maxVal;
+
+	return 0;
+}
+*/
