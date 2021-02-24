@@ -69,3 +69,101 @@ int main() {
 
 	return 0;
 }
+
+/*
+210224 다시 풀었는데 플로이드 문제 왜이렇게 안익숙한거임?
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+int n, m;
+int x, k;
+int connect[101][101];
+
+// 1 -> k -> x로 가는 최단 경로를 구하라는 것.
+플로이드 워셜 문제.
+얘는 연결 상태에 대한 정보만 가지고 있으면 되구나.
+그거 가지고 다시 연결 최소값 구하고.
+
+그리고 제일 중요한 거는 초기화 하는 거.
+최소 값을 구할 떄 최대로 값을 초기화해두어야 한다.
+
+테스트케이스
+1. 
+5 7
+1 2
+1 3
+1 4
+2 4
+3 4
+3 5
+4 5
+4 5
+
+답: 3
+
+2. 
+4 2
+1 3
+2 4 
+3 4
+
+답: -1
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n >> m;
+
+	for (int i = 0; i <= n; i++) {
+		for (int j = 0; j <= n; j++) {
+			connect[i][j] = 987654321;
+		}
+	}
+
+	for (int i = 0; i < m; i++) { 
+		int a, b;
+		cin >> a >> b;
+		connect[a][b] = 1;
+		connect[b][a] = 1;
+	}
+
+	cin >> x >> k;
+
+	for (int k = 1; k <= n; k++) {
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				if (connect[i][k] + connect[k][j] < connect[i][j])
+					connect[i][j] = connect[i][k] + connect[k][j];
+			}
+		}
+	}
+
+	//for (int i = 1; i <= n; i++) {
+	//	for (int j = 1; j <= n; j++) {
+	//		cout << connect[i][j] << ' ';
+	//	}
+	//	cout << endl;
+	//}
+
+	int len = connect[1][k] + connect[k][x];
+		if (len >= 987654321) {
+		cout << -1 << '\n';
+	}
+	else
+		cout << len;
+
+	return 0;
+}
+
+*/
