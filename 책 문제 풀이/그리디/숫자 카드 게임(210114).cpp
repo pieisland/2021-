@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*
+더 줄이려면 입력 받고나서 바로 확인해도 된다.
+*/
+
 int n, m;
 int numbers[100][100];
 
