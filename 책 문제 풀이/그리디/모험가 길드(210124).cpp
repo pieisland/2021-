@@ -76,3 +76,51 @@ int main() {
 
 	return 0;
 }
+
+/*
+210227 다시 풀었는데 정답인지 확인할 수가 있나..
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+//테스트케이스가 하나밖에 없으니 확인을 할 수도 없는데.
+
+int arr[100000];
+int n;
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	cin >> n;
+	for (int i = 0; i < n; i++) cin >> arr[i];
+
+	sort(arr, arr + n);
+
+	int val = arr[0];
+	int cnt = 1;
+	int ans = 0;
+	for (int i = 1; i < n; i++) {
+		if (arr[i] > val) {
+			if (val <= cnt) ans++;
+
+			val = arr[i];
+			cnt = 1;
+		}
+		else cnt++;
+	}
+
+	cout << ans << endl;
+
+	return 0;
+}
+*/
