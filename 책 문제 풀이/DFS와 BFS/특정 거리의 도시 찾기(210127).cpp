@@ -77,3 +77,80 @@ int main() {
 
 	return 0;
 }
+
+/*
+210228
+최단거리이기는 하지만 모두 거리가 1이기 때문에 bfs로 풀어도 된다고 하여
+풀어봤다.
+
+#include<cstdio>
+#include<stdio.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<cmath>
+
+using namespace std;
+
+int n, m, k, x;
+vector<int> vec[300001];
+int check[300001]; //거리가 얼마냐 이건가
+//근데 그냥 저런 거 안해도 되는 거 아님..??
+vector<int> ans;
+
+void bfs() {
+	queue<int> q;
+	//x에서 시작해서 k 거리로 갈 수 있는 거 찾는거죠?
+	q.push(x);
+	check[x] = 1;
+	
+	while (!q.empty()) {
+		int node = q.front();
+		q.pop();
+
+		if (check[node] == k + 1) {
+			ans.push_back(node);
+			continue;
+		}
+
+		for (int i = 0; i < vec[node].size(); i++) {
+			int nextNode = vec[node][i];
+
+			if (check[nextNode] == 0) {
+				check[nextNode] = check[node] + 1;
+				q.push({ nextNode });
+			}
+		}
+	}
+}
+
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	//k가 거리 정보, x가 출발 도시 번호
+	cin >> n >> m >> k >> x;
+
+	for (int i = 0; i < m; i++) {
+		int a, b;
+		cin >> a >> b;
+		vec[a].push_back(b);
+	}
+
+	bfs();
+	if (ans.size() == 0)
+		cout << -1;
+
+	else
+	{
+		sort(ans.begin(), ans.end());
+
+		for (int i = 0; i < ans.size(); i++) cout << ans[i] << '\n';
+	}
+
+	return 0;
+}
+*/
